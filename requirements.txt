@@ -3,4 +3,4 @@ tensorflow-object-detection-api
 opencv-python
 opencv-python-headless
 pillow
-protobuf
+protobuf==3.20.*
