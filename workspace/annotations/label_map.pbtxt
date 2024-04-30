@@ -1,0 +1,29 @@
+item {
+    id: 1
+    name: 'Aloe vera'
+}
+
+item {
+    id: 2
+    name: 'Castor'
+}
+
+item {
+    id: 3
+    name: 'Pepper'
+}
+
+item {
+    id: 4
+    name: 'Neem'
+}
+
+item {
+    id: 5
+    name: 'Curry leaves'
+}
+
+item {
+    id: 6
+    name: 'Tulasi'
+}
