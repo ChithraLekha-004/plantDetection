@@ -28,7 +28,7 @@ if add_select_box == "Image Upload":
         st.image("output.png", caption="Outputimage", use_column_width=True)
 
 elif add_select_box == "Webcam":
-    detect_from_webcam()
+    st.write("In progress")
 
 else:
     st.write("Choose a mode in the sidebar.")
