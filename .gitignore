@@ -183,5 +183,4 @@ trained-inference-graphs/SSD ResNet101 V1 FPN 640x640 (RetinaNet101)
 trained-inference-graphs/SSD ResNet101 V1 FPN 640x640 (RetinaNet101) V2
 
 # temp files
-app_terminal.py
 output.png
