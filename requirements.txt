@@ -3,4 +3,5 @@ tensorflow-object-detection-api
 opencv-python-headless
 streamlit-authenticator
 pillow
+pymongo
 protobuf==3.20.*
