@@ -1,5 +1,6 @@
 tensorflow==2.13.0
 tensorflow-object-detection-api
 opencv-python-headless
+streamlit-authenticator
 pillow
 protobuf==3.20.*
