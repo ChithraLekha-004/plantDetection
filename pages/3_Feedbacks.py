@@ -30,7 +30,7 @@ def feedback_section():
         st.success("Feedback sent successfully.")
 
     st.divider()
-    st.subheader("My Feedbacks")
+    st.subheader("Your Feedbacks")
     feedbacks_current_user = get_current_users_feedback(st.session_state['username'])
     df = pd.DataFrame(list(feedbacks_current_user))
     df.index += 1
