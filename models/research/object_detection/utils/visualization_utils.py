@@ -209,7 +209,7 @@ def draw_bounding_box_on_image(image,
               width=thickness,
               fill=color)
   try:
-    font = ImageFont.truetype('/home/drx/Projects/plantDetection/resources/NotoSans_Condensed-Black.ttf', 28)
+    font = ImageFont.truetype('/home/drx/Projects/plantDetection/resources/NotoSans_Condensed-Black.ttf', 26)
   except IOError:
     font = ImageFont.load_default()
 

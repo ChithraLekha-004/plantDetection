@@ -10,6 +10,10 @@ credentials:
       logged_in: false
       name: abc
       password: $2b$12$BdDX6H1bTIn0vD5gbRYkm.QJYklDzYqhkgH8OI1u2cO8W3QZkudiu
+    test:
+      email: test@gmail.com
+      name: test
+      password: $2b$12$2RK1B8AN/T4UbnzGihdnPuXoLB2VfoSWZYa.gzRBMRFJU7HukWPvK
     def:
       email: def@gmail.com
       failed_login_attempts: 0

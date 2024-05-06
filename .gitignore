@@ -177,3 +177,5 @@ pyrightconfig.json
 
 # temp files
 output.png
+
+.streamlit/secrets.toml
