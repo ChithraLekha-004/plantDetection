@@ -175,12 +175,5 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 
-
-# temp folders
-trained-inference-graphs/SSD MobileNet v2 320x320
-trained-inference-graphs/SSD MobileNet v2 320x320(v2)
-trained-inference-graphs/SSD ResNet101 V1 FPN 640x640 (RetinaNet101)
-trained-inference-graphs/SSD ResNet101 V1 FPN 640x640 (RetinaNet101) V2
-
 # temp files
 output.png

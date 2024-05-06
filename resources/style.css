@@ -1,0 +1,22 @@
+.detected-plant {
+    font-size: 24px;
+    font-weight: bold;
+    color: #61a6f0;
+}
+
+.detected-plant-use {
+    color: #61a6f0;
+}
+
+.medicinal-use-point {
+    color: rgb(186, 86, 86);
+}
+
+.login-info {
+    color:rgb(111, 228, 111);
+    font-size: 20px
+}
+
+.plant-info {
+    font-size: 20px;
+}
