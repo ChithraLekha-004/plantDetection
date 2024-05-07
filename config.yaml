@@ -10,27 +10,24 @@ credentials:
       logged_in: false
       name: abc
       password: $2b$12$BdDX6H1bTIn0vD5gbRYkm.QJYklDzYqhkgH8OI1u2cO8W3QZkudiu
+    admin:
+      email: admin@gmail.com
+      failed_login_attempts: 0
+      logged_in: false
+      name: admin
+      password: $2b$12$q2CMB9mGtOlYjS0kxTzRkuDvGV.cL9sPu01mE2f1X9YCeAVduHp7i
+    sample:
+      email: sample@gmail.com
+      failed_login_attempts: 0
+      logged_in: false
+      name: sample
+      password: $2b$12$2XC0dKX3zaquUhNknZ.EuuDM.t2e0NymyDeu3qpTbsEcdTRetOuki
     test:
       email: test@gmail.com
+      failed_login_attempts: 0
+      logged_in: false
       name: test
       password: $2b$12$2RK1B8AN/T4UbnzGihdnPuXoLB2VfoSWZYa.gzRBMRFJU7HukWPvK
-    def:
-      email: def@gmail.com
-      failed_login_attempts: 0
-      logged_in: false
-      name: def
-      password: $2b$12$XhAoHHB/I1YFZCDocpWA2uyaB8oQogUDE7rLLHr4IHsGfuL81azGS
-    fdg:
-      email: fdg@gmail.com
-      failed_login_attempts: 0
-      logged_in: false
-      name: fdg
-      password: $2b$12$EhMVhyzkGLH7rPF6HFxZMOCr17Qr3gplRA9QcenUjWjcEFFXqy8Bm
-    rt:
-      email: rt@gmail.com
-      logged_in: false
-      name: rt
-      password: $2b$12$M18PnpydWEOXSg6oAaFKXOEPYRmSLAlPKCFbYKPMLdVU6YgJE4iUm
 pre-authorized:
   emails:
   - admin@gmail.com

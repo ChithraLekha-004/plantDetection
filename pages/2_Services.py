@@ -1,7 +1,9 @@
 import yaml
 from yaml.loader import SafeLoader
+import pandas as pd
 import streamlit as st
 import streamlit_authenticator as stauth
+from streamlit_authenticator.utilities.hasher import Hasher
 from utilities import detect_from_image
 
 st.set_page_config(layout="wide")
@@ -63,6 +65,95 @@ def main_content():
                 display_plant_info(detected_plant)
                 st.divider()
 
+def admin_content():
+    def retrieve_users():
+        with open('config.yaml', 'r') as file:
+            config = yaml.load(file, Loader=SafeLoader)
+
+        users_df = pd.DataFrame.from_dict(config['credentials']['usernames'], orient='index')
+        users_df.reset_index(inplace=True)
+        users_df.rename(columns={'index': 'Username'}, inplace=True)
+        users_df.index += 1
+        selected_columns = ['name', 'Username', 'email']
+        users_df = users_df[selected_columns]
+        return users_df
+
+    st.table(retrieve_users())
+
+    choice = st.selectbox("Choose: ", [None, "Add User", "Update User", "Remove User"])
+
+    if choice == "Add User":
+        with st.form(key='add_user_form'):
+            name = st.text_input("Name")
+            username = st.text_input("Username")
+            password = st.text_input("Password", type="password")
+            email = st.text_input("Email")
+            submitted = st.form_submit_button(label='Add User')
+
+        if submitted:
+            if name and username and password and email:
+                hashed_password = Hasher([password]).generate()[0]
+                new_user = {
+                    "email": email,
+                    "name": name,
+                    "password": hashed_password,   
+                }
+                config['credentials']['usernames'][username] = new_user
+                with open('config.yaml', 'w') as file:
+                    yaml.dump(config, file, default_flow_style=False)
+                st.success(f"User '{username}' added successfully!")
+            else:
+                st.error("Please fill in all fields.")
+
+    elif choice == "Update User":
+        user_to_update = st.text_input("Enter the username of the user you want to update: ")
+        if st.button("Update User"):
+            if user_to_update:
+                if user_to_update in config['credentials']['usernames']:
+                    print(f"User '{user_to_update}' found in the credentials.")
+                    with st.form(key='update_user_form'):
+                        new_name = st.text_input("New Name")
+                        new_email = st.text_input("New Email")
+                        new_password = st.text_input("New Password", type="password")
+                        submitted_update = st.form_submit_button(label='Update')
+                    if submitted_update:
+                        if new_name and new_email and new_password:
+                            print(f"Updating user '{user_to_update}' with new details.")
+                            hashed_password = Hasher([new_password]).generate()[0]
+                            updated_user = {
+                                "email": new_email,
+                                "name": new_name,
+                                "password": hashed_password,
+                            }
+                            config['credentials']['usernames'][user_to_update] = updated_user
+                            with open('config.yaml', 'w') as file:
+                                yaml.dump(config, file, default_flow_style=False)
+                            print(f"User '{user_to_update}' updated successfully!")
+                            st.success(f"User '{user_to_update}' updated successfully!")
+                        else:
+                            st.error("Please fill in all fields.")
+                else:
+                    print(f"User '{user_to_update}' not found in the credentials.")
+                    st.error("User not found.")
+            else:
+                print("No username entered.")
+                st.error("Please enter a valid username.")
+
+    elif choice == "Remove User":
+        user_to_delete = st.text_input("Enter the username of the user you want to remove: ")
+        
+        if st.button("Remove User"):
+            if user_to_delete:
+                if user_to_delete in config['credentials']['usernames']:
+                    del config['credentials']['usernames'][user_to_delete]
+                    with open('config.yaml', 'w') as file:
+                        yaml.dump(config, file, default_flow_style=False)
+                    st.success(f"User '{user_to_delete}' removed successfully!")
+                else:
+                    st.error("User not found.")
+            else:
+                st.error("Please enter a valid username.")
+
 # page_bg_img ="""
 #     <style>
 #         [data-testid="stAppViewContainer"]{
@@ -94,7 +185,10 @@ if st.session_state["authentication_status"] is True:
     with st.sidebar:
         st.write(f'Logged in as: <span class="login-info"><i><b>{st.session_state["name"]}</b></i></span>', unsafe_allow_html=True)
         authenticator.logout(location='sidebar', key='logout_button')
-    main_content()
+    if st.session_state["name"] == 'admin':
+        admin_content()
+    else:
+        main_content()
 else:
     auth_selectbox_placeholder = st.sidebar.empty()
     authentication_choice = auth_selectbox_placeholder.selectbox(
@@ -117,7 +211,10 @@ else:
             with st.sidebar:
                 st.write(f'Logged in as: <span class="login-info"><i><b>{st.session_state["name"]}</b></i></span>', unsafe_allow_html=True)
                 authenticator.logout(location='sidebar', key='logout_button')
-            main_content()
+            if(st.session_state['name']) == 'admin':
+                admin_content()
+            else:
+                main_content()
         elif st.session_state["authentication_status"] is False:
             st.error('Username/password is incorrect')
         elif st.session_state["authentication_status"] is None:
