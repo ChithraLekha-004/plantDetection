@@ -3,6 +3,7 @@ import time
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
 
 from PIL import Image
 from models.research.object_detection.utils import label_map_util
@@ -22,7 +23,28 @@ def detect_from_image(image_path):
                                                                     use_display_name=True)
     image_np = load_image_into_numpy_array(image_path)
     
-    input_tensor = tf.convert_to_tensor(image_np)
+    # Get the dimensions of the original image
+    original_height, original_width, _ = image_np.shape
+    # Define the maximum dimensions
+    max_height = 640
+    max_width = 640
+
+    # Check if resizing is necessary
+    if original_height > max_height or original_width > max_width:
+        # Calculate the scaling factor to resize the image while preserving aspect ratio
+        scaling_factor = min(max_height / original_height, max_width / original_width)
+        
+        # Resize the image
+        new_height = int(original_height * scaling_factor)
+        new_width = int(original_width * scaling_factor)
+        image_np_resized = cv2.resize(image_np, (new_width, new_height))
+    else:
+        # Image dimensions are within the threshold, no need to resize
+        image_np_resized = image_np
+       
+    
+    
+    input_tensor = tf.convert_to_tensor(image_np_resized)
     input_tensor = input_tensor[tf.newaxis, ...]
 
     start_time = time.time()
@@ -48,7 +70,7 @@ def detect_from_image(image_path):
             filtered_classes.append(class_name)
     print(list(set(filtered_classes)))
 
-    image_np_with_detections = image_np.copy()
+    image_np_with_detections = image_np_resized .copy()
 
     viz_utils.visualize_boxes_and_labels_on_image_array(
             image_np_with_detections,

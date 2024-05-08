@@ -16,6 +16,23 @@ credentials:
       logged_in: false
       name: admin
       password: $2b$12$q2CMB9mGtOlYjS0kxTzRkuDvGV.cL9sPu01mE2f1X9YCeAVduHp7i
+    anu:
+      email: anu@gmail.com
+      failed_login_attempts: 0
+      logged_in: false
+      name: anu
+      password: $2b$12$jFfzESjy1vlFo3GYofaRy.g6BS1Usi2Qpv/un7klzdgZDbkNBiDha
+    anu1:
+      email: anu1@gmail.com
+      logged_in: false
+      name: anu
+      password: $2b$12$RWorzSJenQcMfEq1JI3bWuXqEKCnbSJ3hdxSBLPa5VtYZi377Rglu
+    pqr:
+      email: pqr@gmail.com
+      failed_login_attempts: 0
+      logged_in: false
+      name: pqr
+      password: $2b$12$LxIJhBYqq7MSdlHPCdkqjud6uuI1WFHwtE7QfT3z4Vlb2PXuNfzMS
     sample:
       email: sample@gmail.com
       failed_login_attempts: 0
